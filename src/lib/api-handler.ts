@@ -5,6 +5,24 @@ const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000/',
 });
 
+export async function get(url: string, config?: AxiosRequestConfig): Promise<ApiResponse> {
+  try {
+    const response = await axiosInstance.get(url, config);
+    const { message, data } = response.data;
+    return { success: true, message, data };
+  } catch (err: any) {
+    if (err.response && err.response.data) {
+      const apiError = err.response.data;
+      const message = apiError.message;
+      const error = apiError.error;
+      return { success: false, error, message };
+    }
+
+    // Failed to call the API.
+    return { success: false, message: err.message };
+  }
+}
+
 export async function post(
   url: string,
   data: any,
