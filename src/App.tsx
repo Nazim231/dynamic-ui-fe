@@ -1,6 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { AppBuilder } from '@/AppBuilder/index';
-import { Page } from './AppBuilder/Page';
 import { Toaster } from 'sonner';
 
 function App() {
@@ -8,8 +6,7 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route element={<AppBuilder />}>
-            <Route path="/page" element={<Page />} />
+          <Route path='/' element={<>This project will be a Form Builder</>}>
           </Route>
         </Routes>
       </Router>
